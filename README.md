@@ -11,6 +11,10 @@ O Jogo Gourmet é uma cli que tenta adivinhar os pratos que as pessoas pensam.
 - Mocha / Chai / Sinon
 - Inquirer js
 
+## Versão com Jest
+
+[Link para a Branch](https://github.com/thiagotrs/jogo-gourmet/)
+
 ## Rodando o Projeto
 
 ### Clone o Projeto
