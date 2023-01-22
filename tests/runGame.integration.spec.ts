@@ -1,6 +1,8 @@
 import { Keys, mockStdin } from './helpers/mockStdIn'
 import { stdout } from 'stdout-stderr'
 import { GameData, runGame } from '@/runGame'
+import { expect } from 'chai'
+import { beforeEach } from 'mocha'
 
 const gameData: GameData[] = [
   {
@@ -31,7 +33,6 @@ describe('runGame', () => {
   })
 
   it('should runGame response correct answer', async () => {
-    expect.assertions(2)
     const output = [
       title,
       `${pensePrato} ${useKeys}`,
@@ -59,12 +60,11 @@ describe('runGame', () => {
     const answer = await runGame(gameData)
     stdout.stop()
 
-    expect(answer).toBeUndefined()
-    expect(stdout.output).toBe(output)
+    expect(answer).to.be.equal(undefined)
+    expect(stdout.output).to.equal(output)
   })
 
   it('should runGame add new question Data', async () => {
-    expect.assertions(3)
     const input = 'Talharim'
     const output = [
       title,
@@ -111,13 +111,12 @@ describe('runGame', () => {
     const answer = await runGame(gameData)
     stdout.stop()
 
-    expect(answer).toBeUndefined()
-    expect(gameData[0].questions).toEqual(['Lasanha', input])
-    expect(stdout.output).toBe(output)
+    expect(answer).to.be.equal(undefined)
+    expect(gameData[0].questions).to.be.eql(['Lasanha', input])
+    expect(stdout.output).to.equal(output)
   })
 
   it('should runGame add new category Data', async () => {
-    expect.assertions(4)
     const cat = 'carne'
     const quest = 'Churrasco'
     const output = [
@@ -174,9 +173,9 @@ describe('runGame', () => {
     const answer = await runGame(gameData)
     stdout.stop()
 
-    expect(answer).toBeUndefined()
-    expect(gameData[2].category).toEqual(cat)
-    expect(gameData[2].questions).toEqual([quest])
-    expect(stdout.output).toBe(output)
+    expect(answer).to.be.equal(undefined)
+    expect(gameData[2].category).to.equal(cat)
+    expect(gameData[2].questions).to.eql([quest])
+    expect(stdout.output).to.equal(output)
   })
 })

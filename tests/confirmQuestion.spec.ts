@@ -1,31 +1,41 @@
 import inquirer from 'inquirer'
 import { confirmQuestion } from '@/confirmQuestion'
+import { use, expect } from 'chai'
+import chaiAsPromised from 'chai-as-promised'
+import sinon from 'sinon'
+import { afterEach, beforeEach } from 'mocha'
 
-const mockedPrompt = jest.spyOn(inquirer, 'prompt')
+use(chaiAsPromised)
+
+let mockedPrompt: any
 
 describe('confirmQuestion', () => {
   beforeEach(() => {
-    mockedPrompt.mockReset()
+    mockedPrompt = sinon.stub(inquirer, 'prompt')
   })
 
   it('should question return true', async () => {
-    mockedPrompt.mockResolvedValue({ confirm_question: true })
+    mockedPrompt.resolves({ confirm_question: true })
 
-    await expect(confirmQuestion('Isso é uma Questão?')).resolves.toBeTruthy()
-    expect(mockedPrompt).toHaveBeenCalledTimes(1)
+    await expect(confirmQuestion('Isso é uma Questão?')).eventually.true
+    expect(mockedPrompt.calledOnce)
   })
 
   it('should question return false', async () => {
-    mockedPrompt.mockResolvedValue({ confirm_question: false })
+    mockedPrompt.resolves({ confirm_question: false })
 
-    await expect(confirmQuestion('Isso é uma Questão?')).resolves.toBeFalsy()
-    expect(mockedPrompt).toHaveBeenCalledTimes(1)
+    await expect(confirmQuestion('Isso é uma Questão?')).eventually.false
+    expect(mockedPrompt.calledOnce)
   })
 
   it('should question throw error', async () => {
-    mockedPrompt.mockRejectedValue(new Error('Erro do sistema'))
+    mockedPrompt.rejects(new Error('Erro do sistema'))
 
-    await expect(confirmQuestion('Isso é uma Questão?')).rejects.toThrow('Erro do sistema')
-    expect(mockedPrompt).toHaveBeenCalledTimes(1)
+    await expect(confirmQuestion('Isso é uma Questão?')).rejectedWith('Erro do sistema')
+    expect(mockedPrompt.calledOnce)
+  })
+
+  afterEach(() => {
+    mockedPrompt.restore()
   })
 })

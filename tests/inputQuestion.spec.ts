@@ -1,25 +1,35 @@
 import inquirer from 'inquirer'
 import { inputQuestion } from '@/inputQuestion'
+import { use, expect } from 'chai'
+import chaiAsPromised from 'chai-as-promised'
+import sinon from 'sinon'
+import { afterEach, beforeEach } from 'mocha'
 
-const mockedPrompt = jest.spyOn(inquirer, 'prompt')
+use(chaiAsPromised)
+
+let mockedPrompt: any
 
 describe('inputQuestion', () => {
   beforeEach(() => {
-    mockedPrompt.mockReset()
+    mockedPrompt = sinon.stub(inquirer, 'prompt')
   })
 
   it('should question return input', async () => {
     const resp = 'Bife Grelhado'
-    mockedPrompt.mockResolvedValue({ input_question: resp })
+    mockedPrompt.resolves({ input_question: resp })
 
-    await expect(inputQuestion('Que prato é esse?')).resolves.toBe(resp)
-    expect(mockedPrompt).toHaveBeenCalledTimes(1)
+    await expect(inputQuestion('Que prato é esse?')).eventually.equal(resp)
+    expect(mockedPrompt.calledOnce)
   })
 
   it('should inputQuestion throw error', async () => {
-    mockedPrompt.mockRejectedValue(new Error('Erro do sistema'))
+    mockedPrompt.rejects(new Error('Erro do sistema'))
 
-    await expect(inputQuestion('Que prato é esse?')).rejects.toThrow('Erro do sistema')
-    expect(mockedPrompt).toHaveBeenCalledTimes(1)
+    await expect(inputQuestion('Que prato é esse?')).rejectedWith('Erro do sistema')
+    expect(mockedPrompt.calledOnce)
+  })
+
+  afterEach(() => {
+    mockedPrompt.restore()
   })
 })

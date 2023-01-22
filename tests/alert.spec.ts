@@ -1,24 +1,34 @@
 import inquirer from 'inquirer'
 import { alert } from '@/alert'
+import { use, expect } from 'chai'
+import chaiAsPromised from 'chai-as-promised'
+import sinon from 'sinon'
+import { afterEach, beforeEach } from 'mocha'
 
-const mockedPrompt = jest.spyOn(inquirer, 'prompt')
+use(chaiAsPromised)
+
+let mockedPrompt: any
 
 describe('alert', () => {
   beforeEach(() => {
-    mockedPrompt.mockReset()
+    mockedPrompt = sinon.stub(inquirer, 'prompt')
   })
 
   it('should alert not return', async () => {
-    mockedPrompt.mockResolvedValue({ alert: 'OK' })
+    mockedPrompt.resolves({ alert: 'OK' })
 
-    await expect(alert('Isso é um Alerta!')).resolves.toBeUndefined()
-    expect(mockedPrompt).toHaveBeenCalledTimes(1)
+    expect(alert('Isso é um Alerta!')).eventually.equal(undefined)
+    expect(mockedPrompt.calledOnce)
   })
 
   it('should alert throw error', async () => {
-    mockedPrompt.mockRejectedValue(new Error('Erro do sistema'))
+    mockedPrompt.rejects(new Error('Erro do sistema'))
 
-    await expect(alert('Isso é um Alerta!')).rejects.toThrow('Erro do sistema')
-    expect(mockedPrompt).toHaveBeenCalledTimes(1)
+    expect(alert('Isso é um Alerta!')).eventually.rejectedWith('Isso é um Alerta!')
+    expect(mockedPrompt.calledOnce)
+  })
+
+  afterEach(() => {
+    mockedPrompt.restore()
   })
 })

@@ -8,7 +8,7 @@ O Jogo Gourmet é uma cli que tenta adivinhar os pratos que as pessoas pensam.
 
 - Node JS
 - Typescript
-- Jest
+- Mocha / Chai / Sinon
 - Inquirer js
 
 ## Rodando o Projeto
