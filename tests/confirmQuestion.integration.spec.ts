@@ -15,8 +15,8 @@ describe('confirmQuestion', () => {
     stdout.stop()
 
     expect(answer).toBeTruthy()
-    expect(stdout.output).toMatch(
-      '? Isso é uma Questão? (Use arrow keys)\n❯ Sim \n  Não ? Isso é uma Questão? Sim'
+    expect(stdout.output).toBe(
+      '? Isso é uma Questão? (Use arrow keys)\n❯ Sim \n  Não ? Isso é uma Questão? Sim\n'
     )
   })
 
@@ -28,7 +28,7 @@ describe('confirmQuestion', () => {
     stdout.stop()
 
     expect(answer).toBeFalsy()
-    expect(stdout.output).toMatch(
+    expect(stdout.output).toBe(
       '? Isso é uma Questão? (Use arrow keys)\n❯ Sim \n  Não ? Isso é uma Questão? \n  Sim \n❯ Não ? Isso é uma Questão? Não\n'
     )
   })
@@ -41,8 +41,8 @@ describe('confirmQuestion', () => {
     stdout.stop()
 
     expect(answer).toBeTruthy()
-    expect(stdout.output).toMatch(
-      '? Isso é uma Questão? (Use arrow keys)\n❯ Sim \n  Não ? Isso é uma Questão? Sim'
+    expect(stdout.output).toBe(
+      '? Isso é uma Questão? (Use arrow keys)\n❯ Sim \n  Não ? Isso é uma Questão? Sim\n'
     )
   })
 })

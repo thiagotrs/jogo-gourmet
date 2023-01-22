@@ -15,8 +15,8 @@ describe('alert', () => {
     stdout.stop()
 
     expect(answer).toBeUndefined()
-    expect(stdout.output).toMatch(
-      '! Isso é um Alerta! (Use arrow keys)\n❯ OK ! Isso é um Alerta! OK'
+    expect(stdout.output).toBe(
+      '! Isso é um Alerta! (Use arrow keys)\n❯ OK ! Isso é um Alerta! OK\n'
     )
   })
 
@@ -28,8 +28,8 @@ describe('alert', () => {
     stdout.stop()
 
     expect(answer).toBeUndefined()
-    expect(stdout.output).toMatch(
-      '! Isso é um Alerta! (Use arrow keys)\n❯ OK ! Isso é um Alerta! OK'
+    expect(stdout.output).toBe(
+      '! Isso é um Alerta! (Use arrow keys)\n❯ OK ! Isso é um Alerta! OK\n'
     )
   })
 })

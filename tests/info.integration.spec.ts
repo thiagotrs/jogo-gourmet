@@ -15,8 +15,8 @@ describe('info', () => {
     stdout.stop()
 
     expect(answer).toBeTruthy()
-    expect(stdout.output).toMatch(
-      '! Isso é uma Informação! (Use arrow keys)\n❯ OK \n  Fechar ! Isso é uma Informação! OK'
+    expect(stdout.output).toBe(
+      '! Isso é uma Informação! (Use arrow keys)\n❯ OK \n  Fechar ! Isso é uma Informação! OK\n'
     )
   })
 
@@ -28,7 +28,7 @@ describe('info', () => {
     stdout.stop()
 
     expect(answer).toBeFalsy()
-    expect(stdout.output).toMatch(
+    expect(stdout.output).toBe(
       '! Isso é uma Informação! (Use arrow keys)\n❯ OK \n  Fechar ! Isso é uma Informação! \n  OK \n❯ Fechar ! Isso é uma Informação! Fechar\n'
     )
   })
@@ -41,8 +41,8 @@ describe('info', () => {
     stdout.stop()
 
     expect(answer).toBeTruthy()
-    expect(stdout.output).toMatch(
-      '! Isso é uma Informação! (Use arrow keys)\n❯ OK \n  Fechar ! Isso é uma Informação! OK'
+    expect(stdout.output).toBe(
+      '! Isso é uma Informação! (Use arrow keys)\n❯ OK \n  Fechar ! Isso é uma Informação! OK\n'
     )
   })
 })

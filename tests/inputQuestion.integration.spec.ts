@@ -17,7 +17,7 @@ describe('inputQuestion', () => {
     stdout.stop()
 
     expect(answer).toBe(input)
-    expect(stdout.output).toMatch(`? ${question} ${input}`)
+    expect(stdout.output).toContain(`? ${question} ${input}`)
   })
 
   it('should inputQuestion ignore when invalid input', async () => {
@@ -30,6 +30,6 @@ describe('inputQuestion', () => {
     stdout.stop()
 
     expect(answer).toBeTruthy()
-    expect(stdout.output).toMatch(`? ${question} ${input}`)
+    expect(stdout.output).toContain(`? ${question} ${input}`)
   })
 })
