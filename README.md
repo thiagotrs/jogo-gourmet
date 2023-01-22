@@ -13,7 +13,7 @@ O Jogo Gourmet é uma cli que tenta adivinhar os pratos que as pessoas pensam.
 
 ## Versão com Mocha / Chai / Sinon
 
-[Link para a Branch](https://github.com/thiagotrs/jogo-gourmet/tree/feat/mocha-chai)
+[Link para a Branch](https://github.com/thiagotrs/jogo-gourmet/tree/mocha-chai)
 
 ## Rodando o Projeto
 
