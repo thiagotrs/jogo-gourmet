@@ -41,10 +41,11 @@ npm run start
 
 ### Docker
 
+Production
 ```shell
 cd jogo-gourmet
 docker build -t jogo-gourmet .
-docker run -rm -it --name jogo jogo-gourmet
+docker run --rm -it --name jogo jogo-gourmet
 ```
 
 ## Autor
